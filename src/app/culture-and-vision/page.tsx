@@ -37,7 +37,7 @@ const CultureAndVisionPage: React.FC = () => {
               At the core of our mission, we aspire to be the premier provider of trusted technology
               services within our network—driven by collaboration and forward-thinking innovation.
               Our aim goes beyond meeting expectations: we strive to exceed them, fostering a culture
-              of excellence that fuels client and team success.
+              of excellence that fuels client and team success. Testing
             </p>
           </article>
 
