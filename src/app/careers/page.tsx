@@ -121,7 +121,7 @@ function JobCard({ job }: { job: Job }) {
           Apply via email
         </a>
         <p className="mt-2 text-xs text-zinc-500">
-          Please attach your resume and a short note about relevant experience.  Testing
+          Please attach your resume and a short note about relevant experience.
         </p>
       </div>
     </article>
