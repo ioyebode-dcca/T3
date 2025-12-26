@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrowRight, MapPin, Briefcase } from "lucide-react";
 
 // ---------- Optional page metadata (App Router) ----------
 export const metadata = {
@@ -7,12 +8,25 @@ export const metadata = {
     "Join TheTabTech — a non-hierarchical, growth-minded team building secure, high-impact cloud and health IT solutions.",
 };
 
+// ---------- Skip Link for Accessibility ----------
+function SkipLink() {
+  return (
+    <a
+      href="#main-content"
+      className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-zinc-900 focus:shadow-lg"
+    >
+      Skip to main content
+    </a>
+  );
+}
+
 // ---------- Types ----------
 type Job = {
   title: string;
   location: string;
   type: "Full-time" | "Contract" | "Part-time";
   summary: string;
+  skills: string[];
   responsibilities: string[];
   requirements: string[];
   applyEmail?: string;
@@ -26,6 +40,7 @@ const jobs: Job[] = [
     type: "Full-time",
     summary:
       "Design secure landing zones, lead migrations, and optimize cloud cost, reliability, and compliance.",
+    skills: ["AWS", "Terraform", "IAM", "VPC", "Cost Optimization"],
     responsibilities: [
       "Own cloud architecture and reference patterns (networking, IAM, data).",
       "Guide modernization roadmaps and well-architected reviews.",
@@ -44,6 +59,7 @@ const jobs: Job[] = [
     type: "Full-time",
     summary:
       "Build CI/CD pipelines and platform automation for reliable, compliant software delivery.",
+    skills: ["Kubernetes", "Tekton", "GitHub Actions", "Terraform", "Linux"],
     responsibilities: [
       "Create/maintain CI/CD (Tekton, GitHub Actions, or similar).",
       "Automate build/test/release, observability, and incident response.",
@@ -62,6 +78,7 @@ const jobs: Job[] = [
     type: "Contract",
     summary:
       "Bridge health IT workflows and technical teams to improve data quality, safety, and outcomes.",
+    skills: ["HL7 FHIR", "EHR Integration", "HIPAA", "Clinical Workflows"],
     responsibilities: [
       "Partner with engineers to design reliable clinical data flows.",
       "Advise on standards and interoperability (FHIR/HL7, HIPAA).",
@@ -78,23 +95,53 @@ const jobs: Job[] = [
 
 // ---------- Components ----------
 function JobCard({ job }: { job: Job }) {
+  const typeColors: Record<string, string> = {
+    "Full-time": "bg-emerald-600",
+    Contract: "bg-blue-600",
+    "Part-time": "bg-purple-600",
+  };
+
   return (
-    <article className="rounded-2xl border border-zinc-200 bg-white/70 p-6 shadow-sm">
+    <article className="group flex flex-col rounded-2xl border border-zinc-200 bg-white/70 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-xl font-semibold text-zinc-900">{job.title}</h3>
-        <span className="rounded-full bg-zinc-900 px-3 py-1 text-xs font-semibold text-white">
+        <span
+          className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold text-white ${typeColors[job.type]}`}
+        >
           {job.type}
         </span>
       </div>
-      <p className="mt-1 text-sm text-zinc-600">
-        {job.location} • {job.type}
-      </p>
 
-      <p className="mt-3 text-zinc-700">{job.summary}</p>
+      <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
+        <span className="inline-flex items-center gap-1">
+          <MapPin size={14} aria-hidden="true" />
+          {job.location}
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <Briefcase size={14} aria-hidden="true" />
+          {job.type}
+        </span>
+      </div>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
+      <p className="mt-4 text-zinc-700">{job.summary}</p>
+
+      {/* Skill badges */}
+      <div className="mt-4 flex flex-wrap gap-2">
+        {job.skills.map((skill) => (
+          <span
+            key={skill}
+            className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600"
+          >
+            {skill}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-5 grid gap-4 md:grid-cols-2">
         <div>
-          <h4 className="mb-2 text-sm font-semibold text-zinc-900">Responsibilities</h4>
+          <h4 className="mb-2 text-sm font-semibold text-zinc-900">
+            Responsibilities
+          </h4>
           <ul className="list-disc space-y-1 pl-5 text-sm text-zinc-700">
             {job.responsibilities.map((r, i) => (
               <li key={i}>{r}</li>
@@ -102,7 +149,9 @@ function JobCard({ job }: { job: Job }) {
           </ul>
         </div>
         <div>
-          <h4 className="mb-2 text-sm font-semibold text-zinc-900">Requirements</h4>
+          <h4 className="mb-2 text-sm font-semibold text-zinc-900">
+            Requirements
+          </h4>
           <ul className="list-disc space-y-1 pl-5 text-sm text-zinc-700">
             {job.requirements.map((r, i) => (
               <li key={i}>{r}</li>
@@ -111,17 +160,16 @@ function JobCard({ job }: { job: Job }) {
         </div>
       </div>
 
-      <div className="mt-5">
+      <div className="mt-auto pt-5">
         <a
-          className="inline-flex items-center justify-center rounded-2xl bg-zinc-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-zinc-800"
-          href={`mailto:${job.applyEmail ?? "careers@thetabtech.com"}?subject=Application: ${encodeURIComponent(
-            job.title
-          )}`}
+          className="inline-flex items-center gap-2 rounded-2xl bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-zinc-800 hover:gap-3"
+          href={`mailto:${job.applyEmail ?? "careers@thetabtech.com"}?subject=Application: ${encodeURIComponent(job.title)}`}
         >
           Apply via email
+          <ArrowRight size={16} aria-hidden="true" />
         </a>
         <p className="mt-2 text-xs text-zinc-500">
-          Please attach your resume and a short note about relevant experience.
+          Attach your resume and a short note about relevant experience.
         </p>
       </div>
     </article>
@@ -131,110 +179,124 @@ function JobCard({ job }: { job: Job }) {
 // ---------- Page ----------
 const CareersPage: React.FC = () => {
   return (
-    <main>
-      {/* Hero */}
-      <section className="relative h-80 overflow-hidden">
-        {/* <img src="/background.png" alt="" className="absolute inset-0 h-full w-full object-cover" /> */}
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-blue-600 to-green-400 opacity-80"
-          aria-hidden="true"
-        />
-        <div className="relative z-10 flex h-full items-center justify-center px-4 text-white">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight">Careers</h1>
-            <p className="mx-auto mt-3 max-w-2xl text-white/90">
-              Join a non-hierarchical, growth-minded team delivering secure, high-impact solutions.
+    <>
+      <SkipLink />
+      <main id="main-content">
+        {/* Hero */}
+        <section className="relative h-80 overflow-hidden">
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-blue-700 to-emerald-500"
+            aria-hidden="true"
+          />
+          <div className="relative z-10 flex h-full items-center justify-center px-4 text-white">
+            <div className="max-w-3xl text-center">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+                Careers
+              </h1>
+              <p className="mx-auto mt-4 max-w-2xl text-base text-white/90 md:text-lg">
+                Join a non-hierarchical, growth-minded team delivering secure,
+                high-impact solutions.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Content */}
+        <section className="container mx-auto px-4 py-16 lg:px-32 xl:px-48">
+          {/* Culture blurb */}
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-lg text-zinc-700">
+              At <strong className="text-zinc-900">TheTabTech</strong>, we
+              assemble top-tier professionals and keep our structure
+              intentionally flat. You&apos;ll find accessible leadership,
+              embedded mentorship, clear growth paths, and a bias for shipping
+              value safely and quickly.
+            </p>
+            <p className="mt-4 text-zinc-700">
+              If you&apos;re a problem-solver who enjoys intellectual challenge
+              and real ownership, we&apos;d love to hear from you.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* Content */}
-      <section className="container mx-auto px-4 py-12 lg:px-48">
-        {/* Culture blurb */}
-        <div className="mx-auto max-w-3xl text-zinc-800">
-          <p>
-            At <strong>TheTabTech</strong>, we assemble top-tier professionals and keep our structure
-            intentionally flat. You’ll find accessible leadership, embedded mentorship, clear growth
-            paths, and a bias for shipping value safely and quickly.
-          </p>
-          <p className="mt-4">
-            If you’re a problem-solver who enjoys intellectual challenge and real ownership,
-            we’d love to hear from you.
-          </p>
-          <p className="mt-4 text-sm text-zinc-600">
-            Prefer to reach out directly?{" "}
-            <a className="underline" href="mailto:careers@thetabtech.com">
-              careers@thetabtech.com
-            </a>
-          </p>
-        </div>
+          {/* Open roles */}
+          <div className="mx-auto mt-12 max-w-5xl">
+            <h2 className="mb-8 text-center text-2xl font-bold text-zinc-900">
+              Open Positions
+            </h2>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              {jobs.map((job) => (
+                <JobCard key={job.title} job={job} />
+              ))}
+            </div>
+          </div>
 
-        {/* Open roles */}
-        <div className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
-          {jobs.map((job) => (
-            <JobCard key={job.title} job={job} />
-          ))}
-        </div>
+          {/* Don't see your role? */}
+          <div className="mx-auto mt-16 max-w-3xl rounded-2xl bg-zinc-900 p-8 text-center shadow-lg">
+            <h3 className="text-2xl font-bold text-white">
+              Don&apos;t see your role?
+            </h3>
+            <p className="mx-auto mt-2 max-w-md text-zinc-400">
+              We&apos;re always happy to meet exceptional people. Send us your
+              resume and tell us what you&apos;re passionate about.
+            </p>
+            <div className="mt-6">
+              <a
+                href="mailto:careers@thetabtech.com"
+                className="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-xl hover:gap-3"
+              >
+                Email careers@thetabtech.com
+                <ArrowRight size={18} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </section>
 
-        {/* Don’t see your role? */}
-        <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-zinc-200 bg-white/70 p-6 text-center shadow-sm">
-          <h3 className="text-lg font-semibold text-zinc-900">Don’t see your role?</h3>
-          <p className="mt-2 text-zinc-700">
-            We’re always happy to meet exceptional people. Email your resume and interests to{" "}
-            <a className="underline" href="mailto:careers@thetabtech.com">
-              careers@thetabtech.com
-            </a>
-            .
-          </p>
-        </div>
-      </section>
-
-      {/* Optional: Basic JobPosting schema for SEO (App Router only) */}
-      {/* Remove this block if you don't want JSON-LD */}
-      <script
-        type="application/ld+json"
-        // @ts-ignore
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            jobs.map((j) => ({
-              "@context": "https://schema.org",
-              "@type": "JobPosting",
-              title: j.title,
-              employmentType: j.type.replace("-", ""),
-              jobLocationType: "TELECOMMUTE",
-              applicantLocationRequirements: {
-                "@type": "Country",
-                name: "US",
-              },
-              hiringOrganization: {
-                "@type": "Organization",
-                name: "TheTabTech, LLC",
-                sameAs: "https://www.thetabtech.com",
-              },
-              description: j.summary,
-              datePosted: new Date().toISOString(),
-              validThrough: new Date(Date.now() + 1000 * 60 * 60 * 24 * 60).toISOString(), // ~60 days
-              industry: ["Cloud", "DevOps", "Health IT"],
-              identifier: {
-                "@type": "PropertyValue",
-                name: "TheTabTech",
-                value: j.title,
-              },
-              jobLocation: {
-                "@type": "Place",
-                address: {
-                  "@type": "PostalAddress",
-                  addressCountry: "US",
+        {/* Basic JobPosting schema for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              jobs.map((j) => ({
+                "@context": "https://schema.org",
+                "@type": "JobPosting",
+                title: j.title,
+                employmentType: j.type.replace("-", ""),
+                jobLocationType: "TELECOMMUTE",
+                applicantLocationRequirements: {
+                  "@type": "Country",
+                  name: "US",
                 },
-              },
-              directApply: true,
-              hiringOrganizationLogo: "https://www.thetabtech.com/icon.png",
-            })),
-          ),
-        }}
-      />
-    </main>
+                hiringOrganization: {
+                  "@type": "Organization",
+                  name: "TheTabTech, LLC",
+                  sameAs: "https://www.thetabtech.com",
+                },
+                description: j.summary,
+                datePosted: new Date().toISOString(),
+                validThrough: new Date(
+                  Date.now() + 1000 * 60 * 60 * 24 * 60
+                ).toISOString(),
+                industry: ["Cloud", "DevOps", "Health IT"],
+                identifier: {
+                  "@type": "PropertyValue",
+                  name: "TheTabTech",
+                  value: j.title,
+                },
+                jobLocation: {
+                  "@type": "Place",
+                  address: {
+                    "@type": "PostalAddress",
+                    addressCountry: "US",
+                  },
+                },
+                directApply: true,
+                hiringOrganizationLogo: "https://www.thetabtech.com/icon.png",
+              }))
+            ),
+          }}
+        />
+      </main>
+    </>
   );
 };
 
