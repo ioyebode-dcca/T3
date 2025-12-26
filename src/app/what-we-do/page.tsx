@@ -48,6 +48,7 @@ function ServiceCard({
     blue: "bg-blue-50 text-blue-500",
     emerald: "bg-emerald-50 text-emerald-500",
     purple: "bg-purple-50 text-purple-500",
+    amber: "bg-amber-50 text-amber-500",
   };
 
   return (
@@ -177,6 +178,14 @@ const WhatWeDoPage = () => {
               tools={["AWS", "Terraform", "OpenShift", "Tekton", "GitHub Actions", "Ansible"]}
             />
             <ServiceCard
+              id="security-devsecops"
+              Icon={ShieldCheck}
+              title="Security & DevSecOps"
+              blurb="Shift-left security embedded into your pipelines—automated scanning, compliance-as-code, and hardening for ATO and continuous authorization."
+              accentColor="purple"
+              tools={["STIG", "NIST", "FedRAMP", "Fortify", "BlackDuck", "OSCAL", "Policy-as-Code"]}
+            />
+            <ServiceCard
               id="health-it"
               Icon={LifeBuoy}
               title="Health IT: Quality & Safety"
@@ -189,7 +198,7 @@ const WhatWeDoPage = () => {
               Icon={UserCheck}
               title="Digital Health SME & Technical Support"
               blurb="Hands-on experts for troubleshooting, performance tuning, and on-call support across EHR integrations, APIs, and secure cloud workloads."
-              accentColor="purple"
+              accentColor="amber"
               tools={["EHR Integration", "REST APIs", "Kubernetes", "Monitoring", "On-Call Support"]}
             />
           </div>

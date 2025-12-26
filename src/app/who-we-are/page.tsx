@@ -1,5 +1,17 @@
 import React from "react";
-import { ArrowRight, Users, Lightbulb, Target, GraduationCap } from "lucide-react";
+import { 
+  ArrowRight, 
+  Users, 
+  Lightbulb, 
+  Target, 
+  GraduationCap,
+  Code,
+  Package,
+  TestTube,
+  Shield,
+  Rocket,
+  Activity,
+} from "lucide-react";
 
 /* ---------- Skip Link for Accessibility ---------- */
 function SkipLink() {
@@ -10,6 +22,121 @@ function SkipLink() {
     >
       Skip to main content
     </a>
+  );
+}
+
+/* ---------- Pipeline Stage Component ---------- */
+type PipelineStageProps = {
+  icon: React.ReactNode;
+  label: string;
+  color: string;
+  isLast?: boolean;
+};
+
+function PipelineStage({ icon, label, color, isLast = false }: PipelineStageProps) {
+  const colorClasses: Record<string, string> = {
+    blue: "bg-blue-100 text-blue-600 border-blue-200",
+    emerald: "bg-emerald-100 text-emerald-600 border-emerald-200",
+    purple: "bg-purple-100 text-purple-600 border-purple-200",
+    amber: "bg-amber-100 text-amber-600 border-amber-200",
+    red: "bg-red-100 text-red-600 border-red-200",
+    cyan: "bg-cyan-100 text-cyan-600 border-cyan-200",
+  };
+
+  return (
+    <div className="flex items-center">
+      <div className="group flex flex-col items-center">
+        <div
+          className={`flex h-14 w-14 items-center justify-center rounded-2xl border-2 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg ${colorClasses[color]}`}
+        >
+          {icon}
+        </div>
+        <span className="mt-2 text-xs font-semibold uppercase tracking-wide text-zinc-600">
+          {label}
+        </span>
+      </div>
+      {!isLast && (
+        <div className="mx-2 hidden h-0.5 w-8 bg-gradient-to-r from-zinc-300 to-zinc-200 sm:block md:mx-3 md:w-12" />
+      )}
+    </div>
+  );
+}
+
+/* ---------- CI/CD Pipeline Visual ---------- */
+function CICDPipeline() {
+  const stages = [
+    { icon: <Code size={24} />, label: "Code", color: "blue" },
+    { icon: <Package size={24} />, label: "Build", color: "emerald" },
+    { icon: <TestTube size={24} />, label: "Test", color: "amber" },
+    { icon: <Shield size={24} />, label: "Secure", color: "purple" },
+    { icon: <Rocket size={24} />, label: "Deploy", color: "red" },
+    { icon: <Activity size={24} />, label: "Monitor", color: "cyan" },
+  ];
+
+  return (
+    <div className="mx-auto mt-16 max-w-5xl">
+      <div className="rounded-2xl border border-zinc-200 bg-gradient-to-br from-white to-zinc-50 p-8 shadow-sm">
+        <div className="mb-6 text-center">
+          <h3 className="text-xl font-bold text-zinc-900">
+            Our DevSecOps Pipeline
+          </h3>
+          <p className="mt-1 text-sm text-zinc-600">
+            Security and quality built into every stage
+          </p>
+        </div>
+
+        {/* Desktop Pipeline */}
+        <div className="hidden items-center justify-center sm:flex">
+          {stages.map((stage, index) => (
+            <PipelineStage
+              key={stage.label}
+              icon={stage.icon}
+              label={stage.label}
+              color={stage.color}
+              isLast={index === stages.length - 1}
+            />
+          ))}
+        </div>
+
+        {/* Mobile Pipeline - 2 rows */}
+        <div className="grid grid-cols-3 gap-4 sm:hidden">
+          {stages.map((stage) => (
+            <div key={stage.label} className="flex flex-col items-center">
+              <div
+                className={`flex h-12 w-12 items-center justify-center rounded-xl border-2 ${
+                  stage.color === "blue" ? "bg-blue-100 text-blue-600 border-blue-200" :
+                  stage.color === "emerald" ? "bg-emerald-100 text-emerald-600 border-emerald-200" :
+                  stage.color === "purple" ? "bg-purple-100 text-purple-600 border-purple-200" :
+                  stage.color === "amber" ? "bg-amber-100 text-amber-600 border-amber-200" :
+                  stage.color === "red" ? "bg-red-100 text-red-600 border-red-200" :
+                  "bg-cyan-100 text-cyan-600 border-cyan-200"
+                }`}
+              >
+                {React.cloneElement(stage.icon as React.ReactElement, { size: 20 })}
+              </div>
+              <span className="mt-1.5 text-[10px] font-semibold uppercase tracking-wide text-zinc-600">
+                {stage.label}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Tools strip */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-2 border-t border-zinc-200 pt-6">
+          <span className="text-xs font-medium text-zinc-500">Powered by:</span>
+          {["Tekton", "GitHub Actions", "Fortify", "BlackDuck", "OpenShift", "Terraform"].map(
+            (tool) => (
+              <span
+                key={tool}
+                className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600"
+              >
+                {tool}
+              </span>
+            )
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -178,6 +305,9 @@ const WhoWeArePage: React.FC = () => {
               </div>
             </article>
           </div>
+
+          {/* CI/CD Pipeline Visual */}
+          <CICDPipeline />
 
           {/* Join Us CTA */}
           <div className="mx-auto mt-16 max-w-3xl rounded-2xl bg-gradient-to-r from-blue-700 to-emerald-500 p-8 text-center text-white shadow-lg">

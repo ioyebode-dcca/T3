@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 const navItems = [
   { name: "Home", href: "/" },
   { name: "What We Do", href: "/what-we-do" },
+  { name: "Who We Are", href: "/who-we-are" },
   { name: "Culture & Vision", href: "/culture-and-vision" },
   { name: "Careers", href: "/careers" },
   { name: "Contact", href: "/contact" },
@@ -16,10 +17,13 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="border-b bg-white/90 backdrop-blur-md">
-      <div className="container mx-auto flex flex-col items-center justify-between gap-3 px-4 py-3 md:flex-row lg:px-48">
+    <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/95 backdrop-blur-md">
+      <div className="container mx-auto flex flex-col items-center justify-between gap-3 px-4 py-3 md:flex-row lg:px-32 xl:px-48">
         {/* Logo and name */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link
+          href="/"
+          className="flex items-center gap-2 transition-opacity hover:opacity-80"
+        >
           <Image
             src="/logo-blue.svg"
             alt="TheTabTech logo"
@@ -29,21 +33,21 @@ export default function Header() {
             className="h-auto w-auto max-h-14"
             style={{ objectFit: "contain" }}
           />
-          <span className="text-lg font-extrabold text-blue-600 tracking-tight">
+          <span className="text-lg font-extrabold tracking-tight text-blue-600">
             THETABTECH
           </span>
         </Link>
 
         {/* Navigation */}
-        <nav className="flex flex-wrap justify-center gap-4">
+        <nav className="flex flex-wrap justify-center gap-1">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`text-sm font-medium transition ${
+              className={`rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
                 pathname === item.href
-                  ? "text-blue-600 underline"
-                  : "text-zinc-800 hover:text-blue-600"
+                  ? "bg-blue-50 text-blue-600"
+                  : "text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900"
               }`}
             >
               {item.name}

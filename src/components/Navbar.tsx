@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import {
   Navbar,
@@ -9,85 +10,91 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
-  Button,
 } from "@nextui-org/react";
-
+import { usePathname } from "next/navigation";
 import NextLink from "next/link";
 import Image from "next/image";
 
+const menuItems = [
+  { name: "Home", href: "/" },
+  { name: "What We Do", href: "/what-we-do" },
+  { name: "Who We Are", href: "/who-we-are" },
+  { name: "Culture & Vision", href: "/culture-and-vision" },
+  { name: "Careers", href: "/careers" },
+  { name: "Contact", href: "/contact" },
+];
+
 export default function NavigationBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const menuItems = [
-    { name: "Home", link: "https://www.thetabtech.com"},
-    { name: "Culture & Vision", link: "/culture-and-vision" },
-    { name: "Who we are", link: "/who-we-are" },
-    { name: "What we do ", link: "/what-we-do" },
-    { name: "Careers", link: "/careers" },
-    { name: "Contact", link: "/contact" },
-  ];
+  const pathname = usePathname();
 
   return (
-    <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      isBordered
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+      classNames={{
+        item: [
+          "data-[active=true]:text-blue-600",
+          "data-[active=true]:font-semibold",
+        ],
+      }}
+    >
+      {/* Mobile menu toggle */}
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
       </NavbarContent>
 
-      {/* <NavbarContent className="sm:hidden pr-3" justify="center">
-        <NavbarBrand>
-          <p className="font-bold text-inherit">TheTabTech</p>
-        </NavbarBrand>
-      </NavbarContent> */}
+      {/* Logo */}
       <NavbarContent className="pr-3" justify="center">
         <NavbarBrand>
-          <p className="font-bold text-inherit">
-            <Image src="/logo.svg" alt="TheTabTech" width={180} height={180} objectPosition="left"/>
-            {/* <Link href="/" color="foreground">
-              TheTabTech
-            </Link> */}
-          </p>
+          <NextLink href="/" className="flex items-center gap-2">
+            <Image
+              src="/logo.svg"
+              alt="TheTabTech"
+              width={180}
+              height={180}
+              className="h-auto w-auto"
+              priority
+            />
+          </NextLink>
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent
-        className="hidden gap-4 text-foreground sm:flex"
-        justify="center"
-      >
-        {/* <NavbarBrand>
-          <p className="font-bold text-inherit">TheTabTech</p>
-        </NavbarBrand> */}
-        {menuItems.map((item, index) => (
-          <NavbarItem key={`${item}-${index}`}>
-            <NextLink href={item.link}>{item.name}</NextLink>
+      {/* Desktop navigation */}
+      <NavbarContent className="hidden gap-6 sm:flex" justify="center">
+        {menuItems.map((item) => (
+          <NavbarItem key={item.href} isActive={pathname === item.href}>
+            <Link
+              as={NextLink}
+              href={item.href}
+              color={pathname === item.href ? "primary" : "foreground"}
+              className={`text-sm font-medium transition-colors hover:text-blue-600 ${
+                pathname === item.href ? "text-blue-600 font-semibold" : ""
+              }`}
+            >
+              {item.name}
+            </Link>
           </NavbarItem>
         ))}
       </NavbarContent>
 
-      {/* <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="warning" href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent> */}
-
+      {/* Mobile menu */}
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
+        {menuItems.map((item) => (
+          <NavbarMenuItem key={item.href}>
             <Link
-              className="w-full"
-              href={item.link}
-              color="foreground"
-              size="lg"
+              as={NextLink}
+              href={item.href}
+              className={`w-full text-lg ${
+                pathname === item.href
+                  ? "font-semibold text-blue-600"
+                  : "text-zinc-700"
+              }`}
+              onPress={() => setIsMenuOpen(false)}
             >
-              {/* <NextLink href={item.link} replace={true}>
-              {item.name}
-            </NextLink> */}
               {item.name}
             </Link>
           </NavbarMenuItem>
