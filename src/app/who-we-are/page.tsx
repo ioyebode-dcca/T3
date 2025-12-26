@@ -1,100 +1,210 @@
 import React from "react";
+import { ArrowRight, Users, Lightbulb, Target, GraduationCap } from "lucide-react";
 
+/* ---------- Skip Link for Accessibility ---------- */
+function SkipLink() {
+  return (
+    <a
+      href="#main-content"
+      className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-zinc-900 focus:shadow-lg"
+    >
+      Skip to main content
+    </a>
+  );
+}
+
+/* ---------- Value Card Component ---------- */
+type ValueCardProps = {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+};
+
+function ValueCard({ icon, title, description }: ValueCardProps) {
+  return (
+    <div className="group flex items-start gap-4 rounded-xl border border-zinc-200 bg-white/70 p-5 shadow-sm transition-all duration-300 hover:shadow-md">
+      <span
+        className="rounded-lg bg-blue-50 p-2 text-blue-600 transition-transform duration-300 group-hover:scale-110"
+        aria-hidden="true"
+      >
+        {icon}
+      </span>
+      <div>
+        <h3 className="font-semibold text-zinc-900">{title}</h3>
+        <p className="mt-1 text-sm text-zinc-600">{description}</p>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Page ---------- */
 const WhoWeArePage: React.FC = () => {
   return (
-    <main>
-      {/* Hero */}
-      <section className="relative h-80 overflow-hidden">
-        {/* Optional background image */}
-        {/* <img src="/background-image.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" /> */}
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-blue-600 to-green-400 opacity-80"
-          aria-hidden="true"
-        />
-        <div className="relative z-10 flex h-full items-center justify-center px-4 text-white">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight">Our Culture</h1>
-            <p className="mx-auto mt-3 max-w-2xl text-white/90">
-              Non-hierarchical, growth-minded, and relentlessly customer-focused.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Content */}
-      <section className="container mx-auto px-4 py-12 lg:px-48">
-        {/* Intro */}
-        <div className="mx-auto max-w-3xl space-y-6 text-zinc-800">
-          <p>
-            At <strong>TheTabTech</strong>, we are dedicated to assembling top-tier professionals,
-            ensuring we remain the foremost experts for both our clients and our team members.
-            Our culture is intentionally non-hierarchical, fostering accessible leadership,
-            abundant professional development, ingrained mentoring, and clear pathways for
-            personal growth and leadership.
-          </p>
-
-          <p>
-            We prioritize an exceptional work environment because our clients’ success is
-            inseparable from the success of our people. Our approach to evaluation is
-            straightforward; when determining compensation and advancement, we follow two
-            equally essential principles:
-          </p>
-
-          {/* Valid ordered list (not nested inside a <p>) */}
-          <ol className="list-decimal space-y-2 pl-6">
-            <li>Creating significant value and impact for clients.</li>
-            <li>Achieving success through collaboration and camaraderie.</li>
-          </ol>
-        </div>
-
-        {/* Founder / Team */}
-        <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
-          <article className="rounded-2xl border border-zinc-200 bg-white/70 p-6 shadow-sm">
-            <h2 className="mb-2 text-2xl font-semibold text-zinc-900">Israel Oyebode</h2>
-            <p className="text-sm uppercase tracking-wide text-zinc-500">Founder & CEO</p>
-
-            {/* Optional headshot */}
-            {/* <img
-              src="/team/israel-oyebode.jpg"
-              alt="Portrait of Israel Oyebode"
-              className="mt-4 h-40 w-40 rounded-xl object-cover"
-            /> */}
-
-            <p className="mt-4 leading-relaxed text-zinc-700">
-              Israel is the Founder and CEO of TheTabTech and a recognized thought leader
-              with extensive experience delivering high-performance, cost-effective solutions.
-              He holds a B.Sc. in Cybersecurity and an M.S. in Cloud Computing from the
-              University of Maryland Global Campus. He helps clients actualize their missions
-              through subject-matter expertise, leadership, and consistent, high-quality
-              deliverables.
-            </p>
-          </article>
-
-          {/* Add more leaders or culture highlights here if you want */}
-          <article className="rounded-2xl border border-zinc-200 bg-white/70 p-6 shadow-sm">
-            <h3 className="mb-3 text-xl font-semibold text-zinc-900">How we work</h3>
-            <ul className="list-disc space-y-2 pl-6 text-zinc-700">
-              <li>Clear ownership with supportive leadership.</li>
-              <li>Mentorship embedded into projects and career paths.</li>
-              <li>Bias for shipping value safely and iterating quickly.</li>
-              <li>Continuous learning: certifications, brown-bags, and peer reviews.</li>
-            </ul>
-
-            <div className="mt-6 rounded-xl bg-zinc-50 p-4 text-sm text-zinc-600">
-              Interested in joining us?{" "}
-              <a className="font-medium text-zinc-900 underline" href="/careers">
-                See careers
-              </a>{" "}
-              or{" "}
-              <a className="font-medium text-zinc-900 underline" href="/contact">
-                get in touch
-              </a>
-              .
+    <>
+      <SkipLink />
+      <main id="main-content">
+        {/* Hero */}
+        <section className="relative h-80 overflow-hidden">
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-blue-700 to-emerald-500"
+            aria-hidden="true"
+          />
+          <div className="relative z-10 flex h-full items-center justify-center px-4 text-white">
+            <div className="max-w-3xl text-center">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+                Our Culture
+              </h1>
+              <p className="mx-auto mt-4 max-w-2xl text-base text-white/90 md:text-lg">
+                Non-hierarchical, growth-minded, and relentlessly
+                customer-focused.
+              </p>
             </div>
-          </article>
-        </div>
-      </section>
-    </main>
+          </div>
+        </section>
+
+        {/* Content */}
+        <section className="container mx-auto px-4 py-16 lg:px-32 xl:px-48">
+          {/* Intro */}
+          <div className="mx-auto max-w-3xl space-y-6 text-zinc-700">
+            <p className="text-lg leading-relaxed">
+              At <strong className="text-zinc-900">TheTabTech</strong>, we are
+              dedicated to assembling top-tier professionals, ensuring we remain
+              the foremost experts for both our clients and our team members.
+              Our culture is intentionally non-hierarchical, fostering
+              accessible leadership, abundant professional development,
+              ingrained mentoring, and clear pathways for personal growth and
+              leadership.
+            </p>
+
+            <p className="leading-relaxed">
+              We prioritize an exceptional work environment because our
+              clients&apos; success is inseparable from the success of our
+              people. Our approach to evaluation is straightforward; when
+              determining compensation and advancement, we follow two equally
+              essential principles:
+            </p>
+
+            {/* Principles */}
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50/50 p-4">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white">
+                  1
+                </span>
+                <p className="text-sm font-medium text-zinc-800">
+                  Creating significant value and impact for clients.
+                </p>
+              </div>
+              <div className="flex items-center gap-3 rounded-xl border border-blue-200 bg-blue-50/50 p-4">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+                  2
+                </span>
+                <p className="text-sm font-medium text-zinc-800">
+                  Achieving success through collaboration and camaraderie.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Founder / Team */}
+          <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
+            {/* Founder Card */}
+            <article className="group rounded-2xl border border-zinc-200 bg-white/70 p-6 shadow-sm transition-all duration-300 hover:shadow-lg">
+              <div className="mb-4 flex items-center gap-4">
+                {/* Placeholder avatar - replace with actual image */}
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-emerald-500 text-xl font-bold text-white">
+                  IO
+                </div>
+                <div>
+                  <h2 className="text-xl font-semibold text-zinc-900">
+                    Israel Oyebode
+                  </h2>
+                  <p className="text-sm font-medium uppercase tracking-wide text-zinc-500">
+                    Founder & CEO
+                  </p>
+                </div>
+              </div>
+
+              <p className="leading-relaxed text-zinc-700">
+                Israel is the Founder and CEO of TheTabTech and a recognized
+                thought leader with extensive experience delivering
+                high-performance, cost-effective solutions. He holds a B.Sc. in
+                Cybersecurity and an M.S. in Cloud Computing from the University
+                of Maryland Global Campus. He helps clients actualize their
+                missions through subject-matter expertise, leadership, and
+                consistent, high-quality deliverables.
+              </p>
+
+              {/* Credentials */}
+              <div className="mt-4 flex flex-wrap gap-2">
+                <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700">
+                  B.Sc. Cybersecurity
+                </span>
+                <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700">
+                  M.S. Cloud Computing
+                </span>
+                <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700">
+                  UMGC
+                </span>
+              </div>
+            </article>
+
+            {/* How We Work Card */}
+            <article className="rounded-2xl border border-zinc-200 bg-white/70 p-6 shadow-sm transition-all duration-300 hover:shadow-lg">
+              <h3 className="mb-4 text-xl font-semibold text-zinc-900">
+                How We Work
+              </h3>
+
+              <div className="space-y-3">
+                <ValueCard
+                  icon={<Users size={18} />}
+                  title="Clear Ownership"
+                  description="Supportive leadership that empowers decision-making."
+                />
+                <ValueCard
+                  icon={<Lightbulb size={18} />}
+                  title="Embedded Mentorship"
+                  description="Growth integrated into projects and career paths."
+                />
+                <ValueCard
+                  icon={<Target size={18} />}
+                  title="Bias for Shipping"
+                  description="Deliver value safely and iterate quickly."
+                />
+                <ValueCard
+                  icon={<GraduationCap size={18} />}
+                  title="Continuous Learning"
+                  description="Certifications, brown-bags, and peer reviews."
+                />
+              </div>
+            </article>
+          </div>
+
+          {/* Join Us CTA */}
+          <div className="mx-auto mt-16 max-w-3xl rounded-2xl bg-gradient-to-r from-blue-700 to-emerald-500 p-8 text-center text-white shadow-lg">
+            <h3 className="text-2xl font-bold">Interested in joining us?</h3>
+            <p className="mx-auto mt-2 max-w-md text-white/90">
+              We&apos;re always looking for talented people who share our values
+              and passion for delivering results.
+            </p>
+            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a
+                href="/careers"
+                className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-zinc-900 shadow transition-all duration-200 hover:bg-zinc-100 hover:gap-3"
+              >
+                See careers
+                <ArrowRight size={18} aria-hidden="true" />
+              </a>
+              <a
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-2xl border border-white/50 px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:border-white hover:bg-white/10"
+              >
+                Get in touch
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
   );
 };
 

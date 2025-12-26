@@ -104,7 +104,7 @@ export default function HomePage() {
           />
           {/* overlay */}
           <div
-            className="absolute inset-0 bg-gradient-to-r from-blue-700/70 to-emerald-500/60"
+            className="absolute inset-0 bg-gradient-to-r from-blue-800/80 to-emerald-600/75"
             aria-hidden="true"
           />
           {/* Copy */}
