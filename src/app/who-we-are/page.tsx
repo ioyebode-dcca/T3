@@ -1,280 +1,222 @@
 import React from "react";
-import { 
-  ArrowRight, 
-  Users, 
-  Lightbulb, 
-  Target, 
-  GraduationCap,
-  Code,
-  Package,
-  TestTube,
-  Shield,
-  Rocket,
-  Activity,
-} from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Users, Target, Award, Heart } from "lucide-react";
+import AnimatedSection from "@/components/AnimatedSection";
 
-/* ---------- Skip Link for Accessibility ---------- */
-function SkipLink() {
-  return (
-    <a
-      href="#main-content"
-      className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-zinc-900 focus:shadow-lg"
-    >
-      Skip to main content
-    </a>
-  );
-}
-
-/* ---------- Value Card Component ---------- */
-type ValueCardProps = {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
+export const metadata = {
+  title: "Who We Are | TheTabTech",
+  description:
+    "Learn about TheTabTech - a team of cloud, DevSecOps, and health IT experts dedicated to delivering mission-critical solutions.",
 };
 
-function ValueCard({ icon, title, description }: ValueCardProps) {
+export default function WhoWeArePage() {
   return (
-    <div className="group flex items-start gap-4 rounded-xl border border-zinc-200 bg-white/70 p-5 shadow-sm transition-all duration-300 hover:shadow-md">
-      <span
-        className="rounded-lg bg-blue-50 p-2 text-blue-600 transition-transform duration-300 group-hover:scale-110"
-        aria-hidden="true"
-      >
-        {icon}
-      </span>
-      <div>
-        <h3 className="font-semibold text-zinc-900">{title}</h3>
-        <p className="mt-1 text-sm text-zinc-600">{description}</p>
-      </div>
-    </div>
-  );
-}
-
-/* ---------- Page ---------- */
-const WhoWeArePage: React.FC = () => {
-  return (
-    <>
-      <SkipLink />
-      <main id="main-content">
-        {/* Hero with Pipeline Background */}
-        <section className="relative h-96 overflow-hidden">
-          {/* Gradient base */}
-          <div
-            className="absolute inset-0 bg-gradient-to-r from-blue-700 to-emerald-500"
-            aria-hidden="true"
-          />
-          
-          {/* Pipeline background illustration - hidden on mobile */}
-          <div className="absolute inset-0 hidden items-center justify-center opacity-20 sm:flex" aria-hidden="true">
-            <div className="flex items-center gap-4 scale-150">
-              {/* Code */}
-              <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10" style={{ animationDuration: '3s' }}>
-                <Code size={28} className="text-white" />
-              </div>
-              <div className="h-0.5 w-12 bg-white/40" />
-              
-              {/* Build */}
-              <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10" style={{ animationDuration: '3s', animationDelay: '0.5s' }}>
-                <Package size={28} className="text-white" />
-              </div>
-              <div className="h-0.5 w-12 bg-white/40" />
-              
-              {/* Test */}
-              <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10" style={{ animationDuration: '3s', animationDelay: '1s' }}>
-                <TestTube size={28} className="text-white" />
-              </div>
-              <div className="h-0.5 w-12 bg-white/40" />
-              
-              {/* Secure */}
-              <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10" style={{ animationDuration: '3s', animationDelay: '1.5s' }}>
-                <Shield size={28} className="text-white" />
-              </div>
-              <div className="h-0.5 w-12 bg-white/40" />
-              
-              {/* Deploy */}
-              <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10" style={{ animationDuration: '3s', animationDelay: '2s' }}>
-                <Rocket size={28} className="text-white" />
-              </div>
-              <div className="h-0.5 w-12 bg-white/40" />
-              
-              {/* Monitor */}
-              <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10" style={{ animationDuration: '3s', animationDelay: '2.5s' }}>
-                <Activity size={28} className="text-white" />
-              </div>
-            </div>
-          </div>
-
-          {/* Hero text */}
-          <div className="relative z-10 flex h-full items-center justify-center px-4 text-white">
-            <div className="max-w-3xl text-center">
+    <main id="main-content">
+      {/* Hero */}
+      <section className="relative h-96 overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/hero/who-we-are-bg.jpg')" }}
+          aria-hidden="true"
+        />
+        {/* Gradient Overlay */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-blue-900/85 via-purple-800/75 to-emerald-700/70"
+          aria-hidden="true"
+        />
+        <div className="relative z-10 flex h-full items-center justify-center px-4 text-white">
+          <div className="max-w-3xl text-center">
+            <AnimatedSection animation="fade-up">
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
                 Who We Are
               </h1>
+            </AnimatedSection>
+            <AnimatedSection animation="fade-up" delay={100}>
               <p className="mx-auto mt-4 max-w-2xl text-base text-white/90 md:text-lg">
-                Meet the team delivering secure, mission-ready solutions.
+                A team of engineers, architects, and consultants passionate about
+                building secure, scalable solutions.
               </p>
-              
-              {/* Pipeline labels - visible hint */}
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-wider text-white/70">
-                <span>Code</span>
-                <span className="text-white/40">→</span>
-                <span>Build</span>
-                <span className="text-white/40">→</span>
-                <span>Test</span>
-                <span className="text-white/40">→</span>
-                <span>Secure</span>
-                <span className="text-white/40">→</span>
-                <span>Deploy</span>
-                <span className="text-white/40">→</span>
-                <span>Monitor</span>
-              </div>
-            </div>
+            </AnimatedSection>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Content */}
-        <section className="container mx-auto px-4 py-16 lg:px-32 xl:px-48">
-          {/* Intro */}
-          <div className="mx-auto max-w-3xl space-y-6 text-zinc-700">
-            <p className="text-lg leading-relaxed">
-              At <strong className="text-zinc-900">TheTabTech</strong>, we are
-              dedicated to assembling top-tier professionals, ensuring we remain
-              the foremost experts for both our clients and our team members.
-              Our culture is intentionally non-hierarchical, fostering
-              accessible leadership, abundant professional development,
-              ingrained mentoring, and clear pathways for personal growth and
-              leadership.
-            </p>
+      {/* Company Overview */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 lg:px-32 xl:px-48">
+          <div className="mx-auto max-w-3xl">
+            <AnimatedSection animation="fade-up">
+              <h2 className="text-3xl font-bold text-zinc-900">Our Story</h2>
+              <p className="mt-6 text-lg leading-relaxed text-zinc-600">
+                TheTabTech was founded with a simple mission: help organizations
+                harness technology to create real impact. We specialize in cloud
+                infrastructure, DevSecOps, AI, and health IT — delivering solutions
+                that are secure, scalable, and built for the long term.
+              </p>
+              <p className="mt-4 text-lg leading-relaxed text-zinc-600">
+                Our team brings decades of combined experience across government,
+                healthcare, and enterprise environments. We understand the unique
+                challenges of regulated industries and build systems that meet the
+                highest standards of security and compliance.
+              </p>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
 
-            <p className="leading-relaxed">
-              We prioritize an exceptional work environment because our
-              clients&apos; success is inseparable from the success of our
-              people. Our approach to evaluation is straightforward; when
-              determining compensation and advancement, we follow two equally
-              essential principles:
-            </p>
+      {/* Values */}
+      <section className="bg-zinc-50 py-20">
+        <div className="container mx-auto px-4 lg:px-32 xl:px-48">
+          <AnimatedSection animation="fade-up">
+            <h2 className="text-center text-3xl font-bold text-zinc-900">
+              Our Values
+            </h2>
+          </AnimatedSection>
 
-            {/* Principles */}
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50/50 p-4">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white">
-                  1
-                </span>
-                <p className="text-sm font-medium text-zinc-800">
-                  Creating significant value and impact for clients.
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <AnimatedSection animation="fade-up" delay={0}>
+              <div className="rounded-2xl bg-white p-6 shadow-sm text-center">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
+                  <Target size={28} />
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-zinc-900">
+                  Mission-Focused
+                </h3>
+                <p className="mt-2 text-sm text-zinc-600">
+                  Every decision we make is guided by our clients&apos; mission and
+                  objectives.
                 </p>
               </div>
-              <div className="flex items-center gap-3 rounded-xl border border-blue-200 bg-blue-50/50 p-4">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
-                  2
-                </span>
-                <p className="text-sm font-medium text-zinc-800">
-                  Achieving success through collaboration and camaraderie.
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-up" delay={100}>
+              <div className="rounded-2xl bg-white p-6 shadow-sm text-center">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-purple-100 text-purple-600">
+                  <Award size={28} />
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-zinc-900">
+                  Excellence
+                </h3>
+                <p className="mt-2 text-sm text-zinc-600">
+                  We hold ourselves to the highest standards in everything we
+                  deliver.
                 </p>
               </div>
-            </div>
-          </div>
+            </AnimatedSection>
 
-          {/* Founder / Team */}
-          <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
-            {/* Founder Card */}
-            <article className="group rounded-2xl border border-zinc-200 bg-white/70 p-6 shadow-sm transition-all duration-300 hover:shadow-lg">
-              <div className="mb-4 flex items-center gap-4">
-                {/* Placeholder avatar - replace with actual image */}
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-emerald-500 text-xl font-bold text-white">
-                  IO
+            <AnimatedSection animation="fade-up" delay={200}>
+              <div className="rounded-2xl bg-white p-6 shadow-sm text-center">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
+                  <Users size={28} />
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-zinc-900">
+                  Collaboration
+                </h3>
+                <p className="mt-2 text-sm text-zinc-600">
+                  We work as an extension of your team, not just a vendor.
+                </p>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-up" delay={300}>
+              <div className="rounded-2xl bg-white p-6 shadow-sm text-center">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-red-100 text-red-600">
+                  <Heart size={28} />
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-zinc-900">
+                  Integrity
+                </h3>
+                <p className="mt-2 text-sm text-zinc-600">
+                  We do the right thing, even when no one is watching.
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Company Data */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 lg:px-32 xl:px-48">
+          <AnimatedSection animation="fade-up">
+            <h2 className="text-center text-3xl font-bold text-zinc-900">
+              Company Information
+            </h2>
+          </AnimatedSection>
+
+          <AnimatedSection animation="fade-up" delay={100}>
+            <div className="mt-12 mx-auto max-w-2xl rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <span className="text-sm font-medium text-zinc-500">
+                    Company Name
+                  </span>
+                  <p className="mt-1 font-semibold text-zinc-900">
+                    TheTabTech, LLC
+                  </p>
                 </div>
                 <div>
-                  <h2 className="text-xl font-semibold text-zinc-900">
-                    Israel Oyebode
-                  </h2>
-                  <p className="text-sm font-medium uppercase tracking-wide text-zinc-500">
-                    Founder & CEO
+                  <span className="text-sm font-medium text-zinc-500">
+                    Location
+                  </span>
+                  <p className="mt-1 font-semibold text-zinc-900">
+                    Laurel, Maryland
+                  </p>
+                </div>
+                <div>
+                  <span className="text-sm font-medium text-zinc-500">
+                    Business Type
+                  </span>
+                  <p className="mt-1 font-semibold text-zinc-900">
+                    Small Business
+                  </p>
+                </div>
+                <div>
+                  <span className="text-sm font-medium text-zinc-500">
+                    NAICS Codes
+                  </span>
+                  <p className="mt-1 font-semibold text-zinc-900">
+                    541512, 541519, 518210
                   </p>
                 </div>
               </div>
-
-              <p className="leading-relaxed text-zinc-700">
-                Israel is the Founder and CEO of TheTabTech and a recognized
-                thought leader with extensive experience delivering
-                high-performance, cost-effective solutions. He holds a B.Sc. in
-                Cybersecurity and an M.S. in Cloud Computing from the University
-                of Maryland Global Campus. He helps clients actualize their
-                missions through subject-matter expertise, leadership, and
-                consistent, high-quality deliverables.
-              </p>
-
-              {/* Credentials */}
-              <div className="mt-4 flex flex-wrap gap-2">
-                <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700">
-                  B.Sc. Cybersecurity
-                </span>
-                <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700">
-                  M.S. Cloud Computing
-                </span>
-                <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700">
-                  UMGC
-                </span>
-              </div>
-            </article>
-
-            {/* How We Work Card */}
-            <article className="rounded-2xl border border-zinc-200 bg-white/70 p-6 shadow-sm transition-all duration-300 hover:shadow-lg">
-              <h3 className="mb-4 text-xl font-semibold text-zinc-900">
-                How We Work
-              </h3>
-
-              <div className="space-y-3">
-                <ValueCard
-                  icon={<Users size={18} />}
-                  title="Clear Ownership"
-                  description="Supportive leadership that empowers decision-making."
-                />
-                <ValueCard
-                  icon={<Lightbulb size={18} />}
-                  title="Embedded Mentorship"
-                  description="Growth integrated into projects and career paths."
-                />
-                <ValueCard
-                  icon={<Target size={18} />}
-                  title="Bias for Shipping"
-                  description="Deliver value safely and iterate quickly."
-                />
-                <ValueCard
-                  icon={<GraduationCap size={18} />}
-                  title="Continuous Learning"
-                  description="Certifications, brown-bags, and peer reviews."
-                />
-              </div>
-            </article>
-          </div>
-
-          {/* Join Us CTA */}
-          <div className="mx-auto mt-16 max-w-3xl rounded-2xl bg-gradient-to-r from-blue-700 to-emerald-500 p-8 text-center text-white shadow-lg">
-            <h3 className="text-2xl font-bold">Interested in joining us?</h3>
-            <p className="mx-auto mt-2 max-w-md text-white/90">
-              We&apos;re always looking for talented people who share our values
-              and passion for delivering results.
-            </p>
-            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a
-                href="/careers"
-                className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-zinc-900 shadow transition-all duration-200 hover:bg-zinc-100 hover:gap-3"
-              >
-                See careers
-                <ArrowRight size={18} aria-hidden="true" />
-              </a>
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-2xl border border-white/50 px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:border-white hover:bg-white/10"
-              >
-                Get in touch
-              </a>
             </div>
-          </div>
-        </section>
-      </main>
-    </>
-  );
-};
+          </AnimatedSection>
+        </div>
+      </section>
 
-export default WhoWeArePage;
+      {/* CTA */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 lg:px-32 xl:px-48">
+          <AnimatedSection animation="fade-up">
+            <div className="rounded-2xl bg-gradient-to-r from-blue-700 to-emerald-500 p-8 text-center text-white shadow-lg sm:p-12">
+              <h2 className="text-2xl font-bold sm:text-3xl">
+                Want to Work With Us?
+              </h2>
+              <p className="mx-auto mt-3 max-w-xl text-white/90">
+                Let&apos;s discuss how we can help your organization achieve its
+                technology goals.
+              </p>
+              <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-zinc-900 shadow transition-all duration-300 hover:bg-zinc-100 hover:gap-3"
+                >
+                  Get in Touch
+                  <ArrowRight size={16} aria-hidden />
+                </Link>
+                <Link
+                  href="/careers"
+                  className="inline-flex items-center gap-2 rounded-2xl border-2 border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition-all duration-300 hover:border-white/50 hover:bg-white/20"
+                >
+                  View Careers
+                </Link>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+    </main>
+  );
+}

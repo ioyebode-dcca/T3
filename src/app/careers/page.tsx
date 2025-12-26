@@ -1,303 +1,249 @@
 import React from "react";
-import { ArrowRight, MapPin, Briefcase } from "lucide-react";
+import Link from "next/link";
+import {
+  ArrowRight,
+  Briefcase,
+  Heart,
+  Rocket,
+  Users,
+  MapPin,
+  Clock,
+} from "lucide-react";
+import AnimatedSection from "@/components/AnimatedSection";
 
-// ---------- Optional page metadata (App Router) ----------
 export const metadata = {
   title: "Careers | TheTabTech",
   description:
-    "Join TheTabTech — a non-hierarchical, growth-minded team building secure, high-impact cloud and health IT solutions.",
+    "Join TheTabTech and build your career in cloud, DevSecOps, AI, and health IT. View open positions and apply today.",
 };
 
-// ---------- Skip Link for Accessibility ----------
-function SkipLink() {
-  return (
-    <a
-      href="#main-content"
-      className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-zinc-900 focus:shadow-lg"
-    >
-      Skip to main content
-    </a>
-  );
-}
-
-// ---------- Types ----------
-type Job = {
+/* ---------- Job Card Component ---------- */
+function JobCard({
+  title,
+  location,
+  type,
+  description,
+}: {
   title: string;
   location: string;
-  type: "Full-time" | "Contract" | "Part-time";
-  summary: string;
-  skills: string[];
-  responsibilities: string[];
-  requirements: string[];
-  applyEmail?: string;
-};
-
-// ---------- Edit your open roles here ----------
-const jobs: Job[] = [
-  {
-    title: "AWS Cloud Architect",
-    location: "Remote (US)",
-    type: "Full-time",
-    summary:
-      "Design secure landing zones, lead migrations, and optimize cloud cost, reliability, and compliance.",
-    skills: ["AWS", "Terraform", "IAM", "VPC", "Cost Optimization"],
-    responsibilities: [
-      "Own cloud architecture and reference patterns (networking, IAM, data).",
-      "Guide modernization roadmaps and well-architected reviews.",
-      "Collaborate with DevOps to automate guardrails and deployments.",
-    ],
-    requirements: [
-      "5+ years on AWS; deep VPC/IAM experience.",
-      "IaC (Terraform/CloudFormation), security baselines, cost optimization.",
-      "Clear written/spoken communication with exec and engineering audiences.",
-    ],
-    applyEmail: "careers@thetabtech.com",
-  },
-  {
-    title: "DevOps Engineer",
-    location: "Remote (US)",
-    type: "Full-time",
-    summary:
-      "Build CI/CD pipelines and platform automation for reliable, compliant software delivery.",
-    skills: ["Kubernetes", "Tekton", "GitHub Actions", "Terraform", "Linux"],
-    responsibilities: [
-      "Create/maintain CI/CD (Tekton, GitHub Actions, or similar).",
-      "Automate build/test/release, observability, and incident response.",
-      "Harden base images and enforce policy-as-code in pipelines.",
-    ],
-    requirements: [
-      "3+ years with containers/Kubernetes and CI/CD.",
-      "Scripting (Bash/Python), IaC (Terraform), and artifact management.",
-      "Hands-on troubleshooting across Linux, networking, and cloud services.",
-    ],
-    applyEmail: "careers@thetabtech.com",
-  },
-  {
-    title: "Clinical Informatics SME",
-    location: "Remote (US)",
-    type: "Contract",
-    summary:
-      "Bridge health IT workflows and technical teams to improve data quality, safety, and outcomes.",
-    skills: ["HL7 FHIR", "EHR Integration", "HIPAA", "Clinical Workflows"],
-    responsibilities: [
-      "Partner with engineers to design reliable clinical data flows.",
-      "Advise on standards and interoperability (FHIR/HL7, HIPAA).",
-      "Support requirements, validation, and stakeholder training.",
-    ],
-    requirements: [
-      "Clinical informatics background; experience with EHR integrations.",
-      "Understanding of quality/safety programs and healthcare data.",
-      "Clear communication and stakeholder facilitation skills.",
-    ],
-    applyEmail: "careers@thetabtech.com",
-  },
-];
-
-// ---------- Components ----------
-function JobCard({ job }: { job: Job }) {
-  const typeColors: Record<string, string> = {
-    "Full-time": "bg-emerald-600",
-    Contract: "bg-blue-600",
-    "Part-time": "bg-purple-600",
-  };
-
+  type: string;
+  description: string;
+}) {
   return (
-    <article className="group flex flex-col rounded-2xl border border-zinc-200 bg-white/70 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="text-xl font-semibold text-zinc-900">{job.title}</h3>
-        <span
-          className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold text-white ${typeColors[job.type]}`}
-        >
-          {job.type}
+    <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+      <h3 className="text-xl font-bold text-zinc-900">{title}</h3>
+      <div className="mt-2 flex flex-wrap gap-4 text-sm text-zinc-500">
+        <span className="flex items-center gap-1">
+          <MapPin size={14} />
+          {location}
+        </span>
+        <span className="flex items-center gap-1">
+          <Clock size={14} />
+          {type}
         </span>
       </div>
-
-      <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
-        <span className="inline-flex items-center gap-1">
-          <MapPin size={14} aria-hidden="true" />
-          {job.location}
-        </span>
-        <span className="inline-flex items-center gap-1">
-          <Briefcase size={14} aria-hidden="true" />
-          {job.type}
-        </span>
-      </div>
-
-      <p className="mt-4 text-zinc-700">{job.summary}</p>
-
-      {/* Skill badges */}
-      <div className="mt-4 flex flex-wrap gap-2">
-        {job.skills.map((skill) => (
-          <span
-            key={skill}
-            className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600"
-          >
-            {skill}
-          </span>
-        ))}
-      </div>
-
-      <div className="mt-5 grid gap-4 md:grid-cols-2">
-        <div>
-          <h4 className="mb-2 text-sm font-semibold text-zinc-900">
-            Responsibilities
-          </h4>
-          <ul className="list-disc space-y-1 pl-5 text-sm text-zinc-700">
-            {job.responsibilities.map((r, i) => (
-              <li key={i}>{r}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="mb-2 text-sm font-semibold text-zinc-900">
-            Requirements
-          </h4>
-          <ul className="list-disc space-y-1 pl-5 text-sm text-zinc-700">
-            {job.requirements.map((r, i) => (
-              <li key={i}>{r}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="mt-auto pt-5">
-        <a
-          className="inline-flex items-center gap-2 rounded-2xl bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-zinc-800 hover:gap-3"
-          href={`mailto:${job.applyEmail ?? "careers@thetabtech.com"}?subject=Application: ${encodeURIComponent(job.title)}`}
-        >
-          Apply via email
-          <ArrowRight size={16} aria-hidden="true" />
-        </a>
-        <p className="mt-2 text-xs text-zinc-500">
-          Attach your resume and a short note about relevant experience.
-        </p>
-      </div>
-    </article>
+      <p className="mt-4 text-sm text-zinc-600">{description}</p>
+      <Link
+        href="/contact"
+        className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-blue-600 transition-all duration-300 hover:gap-3"
+      >
+        Apply Now <ArrowRight size={16} />
+      </Link>
+    </div>
   );
 }
 
-// ---------- Page ----------
-const CareersPage: React.FC = () => {
+/* ---------- Perk Card Component ---------- */
+function PerkCard({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}) {
   return (
-    <>
-      <SkipLink />
-      <main id="main-content">
-        {/* Hero */}
-        <section className="relative h-80 overflow-hidden">
-          <div
-            className="absolute inset-0 bg-gradient-to-r from-blue-700 to-emerald-500"
-            aria-hidden="true"
-          />
-          <div className="relative z-10 flex h-full items-center justify-center px-4 text-white">
-            <div className="max-w-3xl text-center">
+    <div className="flex gap-4">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
+        {icon}
+      </div>
+      <div>
+        <h3 className="font-semibold text-zinc-900">{title}</h3>
+        <p className="mt-1 text-sm text-zinc-600">{description}</p>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Main Page ---------- */
+export default function CareersPage() {
+  return (
+    <main id="main-content">
+      {/* Hero */}
+      <section className="relative h-96 overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/hero/careers-bg.jpg')" }}
+          aria-hidden="true"
+        />
+        {/* Gradient Overlay */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-blue-900/85 via-purple-800/75 to-emerald-700/70"
+          aria-hidden="true"
+        />
+        <div className="relative z-10 flex h-full items-center justify-center px-4 text-white">
+          <div className="max-w-3xl text-center">
+            <AnimatedSection animation="fade-up">
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                Careers
+                Join Our Team
               </h1>
+            </AnimatedSection>
+            <AnimatedSection animation="fade-up" delay={100}>
               <p className="mx-auto mt-4 max-w-2xl text-base text-white/90 md:text-lg">
-                Join a non-hierarchical, growth-minded team delivering secure,
-                high-impact solutions.
+                Build your career with a team that&apos;s passionate about technology,
+                security, and making a real impact.
               </p>
-            </div>
+            </AnimatedSection>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Content */}
-        <section className="container mx-auto px-4 py-16 lg:px-32 xl:px-48">
-          {/* Culture blurb */}
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-lg text-zinc-700">
-              At <strong className="text-zinc-900">TheTabTech</strong>, we
-              assemble top-tier professionals and keep our structure
-              intentionally flat. You&apos;ll find accessible leadership,
-              embedded mentorship, clear growth paths, and a bias for shipping
-              value safely and quickly.
+      {/* Why Join Us */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 lg:px-32 xl:px-48">
+          <AnimatedSection animation="fade-up">
+            <h2 className="text-center text-3xl font-bold text-zinc-900">
+              Why Join TheTabTech?
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-zinc-600">
+              We&apos;re building a team of talented individuals who want to do
+              meaningful work with cutting-edge technology.
             </p>
-            <p className="mt-4 text-zinc-700">
-              If you&apos;re a problem-solver who enjoys intellectual challenge
-              and real ownership, we&apos;d love to hear from you.
-            </p>
+          </AnimatedSection>
+
+          <div className="mt-12 grid gap-8 sm:grid-cols-2">
+            <AnimatedSection animation="fade-up" delay={0}>
+              <PerkCard
+                icon={<Rocket size={24} />}
+                title="Cutting-Edge Technology"
+                description="Work with the latest in cloud, AI, DevSecOps, and health IT technologies."
+              />
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-up" delay={100}>
+              <PerkCard
+                icon={<Users size={24} />}
+                title="Collaborative Culture"
+                description="Join a supportive team that values knowledge sharing and growth."
+              />
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-up" delay={200}>
+              <PerkCard
+                icon={<Heart size={24} />}
+                title="Work-Life Balance"
+                description="Flexible work arrangements and respect for your personal time."
+              />
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-up" delay={300}>
+              <PerkCard
+                icon={<Briefcase size={24} />}
+                title="Career Growth"
+                description="Opportunities to learn, lead, and advance your career."
+              />
+            </AnimatedSection>
           </div>
+        </div>
+      </section>
 
-          {/* Open roles */}
-          <div className="mx-auto mt-12 max-w-5xl">
-            <h2 className="mb-8 text-center text-2xl font-bold text-zinc-900">
+      {/* Open Positions */}
+      <section className="bg-zinc-50 py-20">
+        <div className="container mx-auto px-4 lg:px-32 xl:px-48">
+          <AnimatedSection animation="fade-up">
+            <h2 className="text-center text-3xl font-bold text-zinc-900">
               Open Positions
             </h2>
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              {jobs.map((job) => (
-                <JobCard key={job.title} job={job} />
-              ))}
-            </div>
-          </div>
-
-          {/* Don't see your role? */}
-          <div className="mx-auto mt-16 max-w-3xl rounded-2xl bg-zinc-900 p-8 text-center shadow-lg">
-            <h3 className="text-2xl font-bold text-white">
-              Don&apos;t see your role?
-            </h3>
-            <p className="mx-auto mt-2 max-w-md text-zinc-400">
-              We&apos;re always happy to meet exceptional people. Send us your
-              resume and tell us what you&apos;re passionate about.
+            <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-zinc-600">
+              We&apos;re always looking for talented people to join our team.
             </p>
-            <div className="mt-6">
-              <a
-                href="mailto:careers@thetabtech.com"
-                className="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-xl hover:gap-3"
-              >
-                Email careers@thetabtech.com
-                <ArrowRight size={18} aria-hidden="true" />
-              </a>
-            </div>
+          </AnimatedSection>
+
+          <div className="mt-12 space-y-6">
+            <AnimatedSection animation="fade-up" delay={0}>
+              <JobCard
+                title="DevSecOps Engineer"
+                location="Remote / Hybrid"
+                type="Full-time"
+                description="Design and implement CI/CD pipelines, automate security scanning, and ensure compliance across cloud environments."
+              />
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-up" delay={100}>
+              <JobCard
+                title="Cloud Solutions Architect"
+                location="Remote / Hybrid"
+                type="Full-time"
+                description="Architect and implement scalable AWS solutions for government and healthcare clients."
+              />
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-up" delay={200}>
+              <JobCard
+                title="Health IT Specialist"
+                location="Remote / Hybrid"
+                type="Full-time"
+                description="Work on FHIR interoperability, clinical data pipelines, and HIPAA-compliant solutions."
+              />
+            </AnimatedSection>
           </div>
-        </section>
 
-        {/* Basic JobPosting schema for SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(
-              jobs.map((j) => ({
-                "@context": "https://schema.org",
-                "@type": "JobPosting",
-                title: j.title,
-                employmentType: j.type.replace("-", ""),
-                jobLocationType: "TELECOMMUTE",
-                applicantLocationRequirements: {
-                  "@type": "Country",
-                  name: "US",
-                },
-                hiringOrganization: {
-                  "@type": "Organization",
-                  name: "TheTabTech, LLC",
-                  sameAs: "https://www.thetabtech.com",
-                },
-                description: j.summary,
-                datePosted: new Date().toISOString(),
-                validThrough: new Date(
-                  Date.now() + 1000 * 60 * 60 * 24 * 60
-                ).toISOString(),
-                industry: ["Cloud", "DevOps", "Health IT"],
-                identifier: {
-                  "@type": "PropertyValue",
-                  name: "TheTabTech",
-                  value: j.title,
-                },
-                jobLocation: {
-                  "@type": "Place",
-                  address: {
-                    "@type": "PostalAddress",
-                    addressCountry: "US",
-                  },
-                },
-                directApply: true,
-                hiringOrganizationLogo: "https://www.thetabtech.com/icon.png",
-              }))
-            ),
-          }}
-        />
-      </main>
-    </>
+          <AnimatedSection animation="fade-up" delay={300}>
+            <div className="mt-12 rounded-2xl border border-dashed border-zinc-300 bg-white p-8 text-center">
+              <h3 className="text-lg font-semibold text-zinc-900">
+                Don&apos;t see a role that fits?
+              </h3>
+              <p className="mt-2 text-zinc-600">
+                We&apos;re always interested in hearing from talented people. Send us
+                your resume and let us know how you can contribute.
+              </p>
+              <Link
+                href="/contact"
+                className="mt-4 inline-flex items-center gap-2 rounded-2xl bg-zinc-900 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-zinc-800 hover:gap-3"
+              >
+                Get in Touch
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 lg:px-32 xl:px-48">
+          <AnimatedSection animation="fade-up">
+            <div className="rounded-2xl bg-gradient-to-r from-blue-700 to-emerald-500 p-8 text-center text-white shadow-lg sm:p-12">
+              <h2 className="text-2xl font-bold sm:text-3xl">
+                Ready to Make an Impact?
+              </h2>
+              <p className="mx-auto mt-3 max-w-xl text-white/90">
+                Join us and help organizations build secure, scalable technology
+                solutions.
+              </p>
+              <Link
+                href="/contact"
+                className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-sm font-semibold text-zinc-900 shadow transition-all duration-300 hover:bg-zinc-100 hover:gap-3"
+              >
+                Apply Now
+                <ArrowRight size={18} />
+              </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+    </main>
   );
-};
-
-export default CareersPage;
+}
