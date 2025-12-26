@@ -31,6 +31,7 @@ type ServiceCardProps = {
   href?: string;
   accentColor?: string;
   id?: string;
+  tools?: string[];
 };
 
 function ServiceCard({
@@ -40,6 +41,7 @@ function ServiceCard({
   href = "/contact",
   accentColor = "red",
   id,
+  tools = [],
 }: ServiceCardProps) {
   const colorClasses: Record<string, string> = {
     red: "bg-red-50 text-red-500",
@@ -51,7 +53,7 @@ function ServiceCard({
   return (
     <article
       id={id}
-      className="group w-full max-w-md rounded-2xl border border-zinc-200 bg-white/70 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-lg scroll-mt-24"
+      className="group flex w-full max-w-md flex-col rounded-2xl border border-zinc-200 bg-white/70 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-lg scroll-mt-24"
     >
       <div className="mb-4 flex items-center gap-3">
         <span
@@ -63,9 +65,24 @@ function ServiceCard({
         <h2 className="text-lg font-semibold text-zinc-900">{title}</h2>
       </div>
       <p className="text-sm leading-relaxed text-zinc-600">{blurb}</p>
+      
+      {/* Tool badges */}
+      {tools.length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {tools.map((tool) => (
+            <span
+              key={tool}
+              className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-200"
+            >
+              {tool}
+            </span>
+          ))}
+        </div>
+      )}
+      
       <a
         href={href}
-        className="mt-5 inline-flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 transition-all duration-200 hover:border-zinc-400 hover:bg-zinc-50 hover:gap-3"
+        className="mt-auto pt-5 inline-flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 transition-all duration-200 hover:border-zinc-400 hover:bg-zinc-50 hover:gap-3 w-fit"
         aria-label={`Learn more about ${title}`}
       >
         Talk to an expert
@@ -80,13 +97,20 @@ type StatProps = {
   Icon: LucideIcon;
   kpi: string;
   caption: string;
+  accentColor?: string;
 };
 
-function Stat({ Icon, kpi, caption }: StatProps) {
+function Stat({ Icon, kpi, caption, accentColor = "emerald" }: StatProps) {
+  const colorClasses: Record<string, string> = {
+    emerald: "bg-emerald-50 text-emerald-600",
+    blue: "bg-blue-50 text-blue-600",
+    purple: "bg-purple-50 text-purple-600",
+  };
+
   return (
     <div className="group flex items-start gap-3 rounded-2xl border border-zinc-200 bg-white/70 p-5 shadow-sm transition-all duration-300 hover:shadow-md">
       <span
-        className="rounded-xl bg-emerald-50 p-2 text-emerald-600 transition-transform duration-300 group-hover:scale-110"
+        className={`rounded-xl p-2 transition-transform duration-300 group-hover:scale-110 ${colorClasses[accentColor]}`}
         aria-hidden="true"
       >
         <Icon size={22} />
@@ -142,13 +166,15 @@ const WhatWeDoPage = () => {
               title="CIO Advisory Services"
               blurb="Executive-level guidance on strategy, governance, cost control, and vendor selection—turning technology plans into measurable business results."
               accentColor="blue"
+              tools={["IT Strategy", "FinOps", "Governance", "Vendor Selection", "Roadmapping"]}
             />
             <ServiceCard
               id="cloud-devops"
               Icon={Cloud}
               title="Cloud Computing, DevOps & Automation"
-              blurb="Secure landing zones, CI/CD (Tekton/GitHub Actions), infrastructure as code, and compliance automation to ship reliably at scale."
+              blurb="Secure landing zones, CI/CD, infrastructure as code, and compliance automation to ship reliably at scale."
               accentColor="emerald"
+              tools={["AWS", "Terraform", "OpenShift", "Tekton", "GitHub Actions", "Ansible"]}
             />
             <ServiceCard
               id="health-it"
@@ -156,6 +182,7 @@ const WhatWeDoPage = () => {
               title="Health IT: Quality & Safety"
               blurb="Interoperability, data pipelines, and reliability engineering tailored to healthcare—improving outcomes while meeting regulatory requirements."
               accentColor="red"
+              tools={["HL7 FHIR", "HIPAA", "Interoperability", "Data Pipelines", "Clinical Informatics"]}
             />
             <ServiceCard
               id="digital-health-support"
@@ -163,6 +190,7 @@ const WhatWeDoPage = () => {
               title="Digital Health SME & Technical Support"
               blurb="Hands-on experts for troubleshooting, performance tuning, and on-call support across EHR integrations, APIs, and secure cloud workloads."
               accentColor="purple"
+              tools={["EHR Integration", "REST APIs", "Kubernetes", "Monitoring", "On-Call Support"]}
             />
           </div>
 
@@ -183,16 +211,19 @@ const WhatWeDoPage = () => {
                 Icon={TrendingDown}
                 kpi="-30% cloud spend"
                 caption="in 90 days via tagging, rightsizing, and S3 lifecycle policies"
+                accentColor="emerald"
               />
               <Stat
                 Icon={CheckCircle2}
                 kpi="99.95% uptime"
                 caption="through observability, runbooks, and proactive SLO reviews"
+                accentColor="blue"
               />
               <Stat
                 Icon={ShieldCheck}
                 kpi="STIG/Policy as Code"
                 caption="pipeline checks + automated hardening for ATO readiness"
+                accentColor="purple"
               />
             </div>
 
@@ -212,7 +243,26 @@ const WhatWeDoPage = () => {
                   (HIPAA). Automated backups, IAM least-privilege, and cost
                   guardrails.
                 </p>
+                
+                {/* Tech used */}
                 <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600">
+                    AWS
+                  </span>
+                  <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600">
+                    Terraform
+                  </span>
+                  <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600">
+                    GitHub Actions
+                  </span>
+                  <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600">
+                    HIPAA
+                  </span>
+                </div>
+                
+                {/* Outcomes */}
+                <div className="mt-4 flex flex-wrap gap-2 border-t border-zinc-200 pt-4">
+                  <span className="text-xs font-medium uppercase tracking-wide text-zinc-500">Outcomes:</span>
                   <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700">
                     Faster releases
                   </span>
