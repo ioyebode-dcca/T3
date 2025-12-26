@@ -1,6 +1,8 @@
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Preloader from "@/components/Preloader";
+import BackToTop from "@/components/BackToTop";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -52,9 +54,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
+        <Preloader />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <BackToTop />
 
         {/* Organization schema (edit social links if you have them) */}
         <script
