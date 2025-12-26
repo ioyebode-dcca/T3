@@ -50,7 +50,7 @@ export default function ContactPage() {
               Contact Us
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-base text-white/90 md:text-lg">
-              Let's talk about how we can help secure and automate your mission-critical systems.
+              Let&apos;s talk about how we can help secure and automate your mission-critical systems.
             </p>
           </div>
         </div>
@@ -66,7 +66,7 @@ export default function ContactPage() {
                 Get in Touch
               </h2>
               <p className="mb-8 text-lg leading-relaxed text-zinc-600">
-                Have a question or want to discuss a potential project? We'd love
+                Have a question or want to discuss a potential project? We&apos;d love
                 to hear from you. Reach out and our team will respond within 24
                 hours.
               </p>
@@ -118,7 +118,7 @@ export default function ContactPage() {
                 Send a Message
               </h3>
               <p className="mb-6 text-sm text-zinc-600">
-                Fill out the form below and we'll get back to you shortly.
+                Fill out the form below and we&apos;ll get back to you shortly.
               </p>
 
               {status === "success" ? (
@@ -130,7 +130,7 @@ export default function ContactPage() {
                     Message Sent!
                   </h4>
                   <p className="text-zinc-600">
-                    Thank you for reaching out. We'll get back to you soon.
+                    Thank you for reaching out. We&apos;ll get back to you soon.
                   </p>
                   <button
                     onClick={() => setStatus("idle")}
