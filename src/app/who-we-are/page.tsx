@@ -63,41 +63,41 @@ const WhoWeArePage: React.FC = () => {
             aria-hidden="true"
           />
           
-          {/* Pipeline background illustration */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-15" aria-hidden="true">
+          {/* Pipeline background illustration - hidden on mobile */}
+          <div className="absolute inset-0 hidden items-center justify-center opacity-20 sm:flex" aria-hidden="true">
             <div className="flex items-center gap-4 scale-150">
               {/* Code */}
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10">
+              <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10" style={{ animationDuration: '3s' }}>
                 <Code size={28} className="text-white" />
               </div>
               <div className="h-0.5 w-12 bg-white/40" />
               
               {/* Build */}
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10">
+              <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10" style={{ animationDuration: '3s', animationDelay: '0.5s' }}>
                 <Package size={28} className="text-white" />
               </div>
               <div className="h-0.5 w-12 bg-white/40" />
               
               {/* Test */}
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10">
+              <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10" style={{ animationDuration: '3s', animationDelay: '1s' }}>
                 <TestTube size={28} className="text-white" />
               </div>
               <div className="h-0.5 w-12 bg-white/40" />
               
               {/* Secure */}
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10">
+              <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10" style={{ animationDuration: '3s', animationDelay: '1.5s' }}>
                 <Shield size={28} className="text-white" />
               </div>
               <div className="h-0.5 w-12 bg-white/40" />
               
               {/* Deploy */}
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10">
+              <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10" style={{ animationDuration: '3s', animationDelay: '2s' }}>
                 <Rocket size={28} className="text-white" />
               </div>
               <div className="h-0.5 w-12 bg-white/40" />
               
               {/* Monitor */}
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10">
+              <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl border-2 border-white/40 bg-white/10" style={{ animationDuration: '3s', animationDelay: '2.5s' }}>
                 <Activity size={28} className="text-white" />
               </div>
             </div>
