@@ -5,6 +5,7 @@ import {
   Network,
   LifeBuoy,
   ArrowRight,
+  FileText,
   type LucideIcon,
 } from "lucide-react";
 
@@ -20,7 +21,10 @@ function Teaser({ Icon, title, blurb, href }: TeaserProps) {
   return (
     <article className="w-full max-w-md rounded-2xl border border-zinc-200 bg-white/70 p-6 shadow-sm backdrop-blur transition hover:shadow-md">
       <div className="mb-3 flex items-center gap-3">
-        <span className="rounded-xl bg-red-50 p-3 text-red-500" aria-hidden="true">
+        <span
+          className="rounded-xl bg-red-50 p-3 text-red-500"
+          aria-hidden="true"
+        >
           <Icon size={24} />
         </span>
         <h3 className="text-lg font-semibold text-zinc-900">{title}</h3>
@@ -60,11 +64,27 @@ export default function HomePage() {
         {/* Copy */}
         <div className="relative z-10 flex h-full items-center justify-center px-4 text-center text-white">
           <div>
-            <h1 className="text-4xl font-bold tracking-tight">Pioneering Technology</h1>
+            <h1 className="text-4xl font-bold tracking-tight">
+              Pioneering Technology
+            </h1>
             <p className="mx-auto mt-3 max-w-2xl text-white/90">
-              Secure cloud, DevOps automation, and digital health solutions that deliver outcomes.
+              Secure cloud, DevOps automation, and digital health solutions that
+              deliver outcomes.
             </p>
-            <div className="mt-6 flex items-center justify-center gap-3">
+
+            {/* HERO CTAs */}
+            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              {/* PDF Button */}
+              <a
+                href="/TheTabTech-Capability-Statement.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow hover:bg-blue-700"
+              >
+                <FileText size={18} aria-hidden />
+                View Capability Statement
+              </a>
+
               <Link
                 href="/what-we-do"
                 className="inline-flex items-center gap-2 rounded-2xl bg-white/90 px-5 py-3 text-sm font-semibold text-zinc-900 shadow hover:bg-white"
@@ -72,11 +92,22 @@ export default function HomePage() {
                 What we do
                 <ArrowRight size={18} aria-hidden />
               </Link>
+
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 rounded-2xl border border-white/70 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
               >
                 Contact us
+              </Link>
+            </div>
+
+            {/* Optional SEO-friendly link to the page */}
+            <div className="mt-4">
+              <Link
+                href="/capabilities"
+                className="text-sm text-white/90 underline underline-offset-4 hover:text-white"
+              >
+                View capabilities page
               </Link>
             </div>
           </div>
@@ -86,8 +117,8 @@ export default function HomePage() {
       {/* Intro & Teasers */}
       <section className="container mx-auto px-4 py-12 lg:px-48">
         <p className="mx-auto max-w-3xl text-center text-zinc-700">
-          We help regulated teams design, secure, and automate cloud platforms—so you can ship faster,
-          reduce risk, and control costs.
+          We help regulated teams design, secure, and automate cloud platforms—so
+          you can ship faster, reduce risk, and control costs.
         </p>
 
         {/* Services teaser */}
@@ -114,19 +145,37 @@ export default function HomePage() {
 
         {/* Trust strip */}
         <div className="mx-auto mt-12 max-w-5xl rounded-2xl border border-zinc-200 bg-white/70 p-5 text-center text-sm text-zinc-600">
-          <span className="font-semibold text-zinc-900">Results:</span> –30% cloud spend in 90 days •
-          99.95% uptime • STIG/Policy-as-Code pipelines
+          <span className="font-semibold text-zinc-900">Results:</span> –30%
+          cloud spend in 90 days • 99.95% uptime • STIG/Policy-as-Code pipelines
         </div>
+      </section>
 
-        {/* Secondary CTA */}
-        <div className="mt-10 text-center">
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 rounded-2xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-zinc-800"
-          >
-            Schedule a free consultation
-            <ArrowRight size={18} aria-hidden />
-          </Link>
+      {/* Big CTA section (like your screenshot) */}
+      <section className="bg-zinc-900 py-16">
+        <div className="container mx-auto px-4 text-center lg:px-48">
+          <h2 className="mb-6 text-4xl font-extrabold tracking-tight text-white">
+            LET&apos;S BUILD WHAT MATTERS<span className="text-blue-500">.</span>
+          </h2>
+
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href="/TheTabTech-Capability-Statement.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-8 py-4 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-blue-700"
+            >
+              <FileText size={18} aria-hidden />
+              View Capability Statement
+            </a>
+
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-2xl border border-white/30 px-8 py-4 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-white/10"
+            >
+              Schedule a Call
+              <ArrowRight size={18} aria-hidden />
+            </Link>
+          </div>
         </div>
       </section>
     </main>
