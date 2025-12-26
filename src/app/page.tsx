@@ -115,7 +115,7 @@ export default function HomePage() {
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: "url('/images/hero-bg.jpg')",
+              backgroundImage: "url('/hero/hero-bg.jpg')",
             }}
             aria-hidden="true"
           />
