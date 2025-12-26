@@ -160,8 +160,15 @@ export default function WhatWeDoPage() {
       <main id="main-content">
         {/* Hero */}
         <section className="relative h-80 overflow-hidden">
+          {/* Background Image */}
           <div
-            className="absolute inset-0 bg-gradient-to-r from-blue-700 to-emerald-500"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url('/hero/what-we-do-bg.jpg')" }}
+            aria-hidden="true"
+          />
+          {/* Gradient Overlay */}
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-blue-900/85 via-purple-800/75 to-emerald-700/70"
             aria-hidden="true"
           />
           <div className="relative z-10 flex h-full items-center justify-center px-4 text-white">
