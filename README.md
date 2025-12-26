@@ -40,7 +40,7 @@ src/
  │
 public/
  ├─ hero/new-background.jpg
- ├─ logo-blue.svg
+ ├─ logo.svg
  ├─ favicon.ico
  └─ og-image.png
 

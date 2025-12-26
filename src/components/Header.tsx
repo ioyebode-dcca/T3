@@ -25,7 +25,7 @@ export default function Header() {
           className="flex items-center gap-2 transition-opacity hover:opacity-80"
         >
           <Image
-            src="/logo-blue.svg"
+            src="/logo.svg"
             alt="TheTabTech logo"
             width={70}
             height={70}

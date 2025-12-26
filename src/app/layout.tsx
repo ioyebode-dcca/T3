@@ -70,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@type": "Organization",
               name: "TheTabTech, LLC",
               url: "https://www.thetabtech.com",
-              logo: "https://www.thetabtech.com/logo-blue.svg",
+              logo: "https://www.thetabtech.com/logo.svg",
               sameAs: [
                 "https://www.linkedin.com/company/thetabtech"
                 // add other profiles if you have them

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1d4ed8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- T3 Cube Icon -->
+  <g transform="translate(5, 8)">
+    <!-- Three stacked T bars forming abstract cube -->
+    <rect x="0" y="0" width="24" height="5" rx="1" fill="#1d4ed8"/>
+    <rect x="0" y="14" width="24" height="5" rx="1" fill="#7c3aed"/>
+    <rect x="0" y="28" width="24" height="5" rx="1" fill="#10b981"/>
+    <!-- Vertical connector -->
+    <rect x="9" y="0" width="5" height="40" rx="1" fill="url(#grad2)"/>
+  </g>
+  <!-- Text -->
+  <text x="42" y="38" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1e293b">
+    <tspan>The</tspan><tspan fill="#7c3aed">Tab</tspan><tspan>Tech</tspan>
+  </text>
+</svg>
